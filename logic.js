@@ -426,31 +426,28 @@ function canMoveRight() {
 }
 
 function canMoveUp() {
-	for (let c = 0; c < columns; c++) {
-		for (let r = 0; r < rows; r++) {
-			// console.log(`${r}-${c}`)
-
-			if(board[r][c] !== 0) {
-				if(board[r-1][c] === 0 || board[r-1][c] === board[r][c]) {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
+    for (let c = 0; c < columns; c++) {
+        for (let r = 1; r < rows; r++) { // Start from r = 1 to avoid accessing board[-1][c]
+            if (board[r][c] !== 0) {
+                if (board[r - 1] === undefined || board[r - 1][c] === 0 || board[r - 1][c] === board[r][c]) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
-function canMoveDown() {
-	for (let c = 0; c < columns; c++) {
-		for (let r = 0; r < rows; r++) {
-			// console.log(`${r}-${c}`)
 
-			if(board[r][c] !== 0) {
-				if(board[r+1][c] === 0 || board[r+1][c] === board[r][c]) {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
+function canMoveDown() {
+    for (let c = 0; c < columns; c++) {
+        for (let r = 0; r < rows - 1; r++) { // Start from r = 0 and stop before the last row
+            if (board[r][c] !== 0) {
+                if (board[r + 1][c] === 0 || board[r + 1][c] === board[r][c]) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
